@@ -11,6 +11,14 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(photo.title),
+        actions: [
+          Icon(Icons.settings_input_component_outlined),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Icon(Icons.favorite),
+          ),
+          Icon(Icons.more_vert),
+        ],
       ),
     );
   }
