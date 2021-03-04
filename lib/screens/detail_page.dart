@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
   final Photo photo;
+  bool _light = true;
 
   DetailPage(this.photo);
 
@@ -11,15 +12,41 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(photo.title),
-        actions: [
-          Icon(Icons.settings_input_component_outlined),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.favorite),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings_input_component_outlined),
+            onPressed: () {
+              _onSettingButtonPressed();
+            },
           ),
-          Icon(Icons.more_vert),
+          IconButton(icon: Icon(Icons.favorite), onPressed: () {}),
+          IconButton(icon: Icon(Icons.more_vert), onPressed: () {})
         ],
       ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(photo.title),
+              Text(photo.thumbnailUrl),
+              Switch(
+                value: _light,
+                onChanged: (state) {
+                  setState() {
+                    _light = state;
+                  }
+                },
+              )
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  void _onSettingButtonPressed() {
+    print("setting button clicked");
   }
 }
