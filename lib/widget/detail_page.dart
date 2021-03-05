@@ -1,4 +1,5 @@
 import 'package:bb_earn_english/models/photo.dart';
+import 'package:bb_earn_english/untils/theme.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
@@ -23,26 +24,7 @@ class DetailPage extends StatelessWidget {
           IconButton(icon: Icon(Icons.more_vert), onPressed: () {})
         ],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(photo.title),
-              Text(photo.thumbnailUrl),
-              Switch(
-                value: _light,
-                onChanged: (state) {
-                  setState() {
-                    _light = state;
-                  }
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+      body: DarkLightTheme(),
     );
   }
 

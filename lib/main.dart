@@ -1,4 +1,4 @@
-import 'package:bb_earn_english/screens/home_page.dart';
+import 'package:bb_earn_english/widget/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -17,4 +17,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
