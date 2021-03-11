@@ -3,6 +3,7 @@ import 'package:bb_earn_english/untils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'app_bar_detail.dart';
 import 'bottom_detail.dart';
 
 class DetailPage extends StatelessWidget {
@@ -77,140 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            ActionBar(showAppbar: _showAppbar),
+            AppBarDetail(showAppbar: _showAppbar),
             Content(scrollViewController: _scrollViewController),
             BottomDetail(showBottomBar: _showBottomBar)
           ],
         ),
-      ),
-    );
-  }
-}
-
-class BottomBar extends StatelessWidget {
-  const BottomBar({
-    Key key,
-    bool showBottomBar,
-  })  : _showBottomBar = showBottomBar,
-        super(key: key);
-
-  final bool _showBottomBar;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      color: Colors.red,
-      height: _showBottomBar ? 110.0 : 0.0,
-      duration: Duration(milliseconds: 200),
-      child: Column(
-        children: <Widget>[
-          Expanded(
-              child: Container(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                //slider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                        icon: Icon(Icons.skip_previous),
-                        iconSize: 35.0,
-                        color: Colors.white,
-                        onPressed: null),
-                    IconButton(
-                      icon: Icon(Icons.play_arrow),
-                      iconSize: 50.0,
-                      color: Colors.white,
-                    ),
-                    IconButton(
-                        icon: Icon(Icons.skip_next),
-                        iconSize: 35.0,
-                        color: Colors.white,
-                        onPressed: null),
-                  ],
-                ),
-              ],
-            ),
-          ))
-        ],
-      ),
-    );
-  }
-}
-
-class ActionBar extends StatelessWidget {
-  const ActionBar({
-    Key key,
-    bool showBottomBar,
-    bool showAppbar,
-  })  : _showAppbar = showAppbar,
-        super(key: key);
-
-  final bool _showAppbar;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      height: _showAppbar ? 56.0 : 0.0,
-      duration: Duration(milliseconds: 200),
-      child: AppBar(
-        title: Text("BB Learn English"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings_input_component_outlined),
-            onPressed: () {
-              showAlertDialog(context);
-            },
-          ),
-          IconButton(icon: Icon(Icons.favorite), onPressed: () {}),
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: PopupMenuButton(
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(Icons.playlist_add, color: Colors.black45),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                        child: Text('Add to play list'),
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(Icons.download_rounded, color: Colors.black45),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                        child: Text('Download'),
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(Icons.share, color: Colors.black45),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                        child: Text('Share'),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-              child: Icon(Icons.more_vert),
-            ),
-          )
-        ],
       ),
     );
   }
