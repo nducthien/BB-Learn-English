@@ -1,6 +1,5 @@
 import 'package:bb_earn_english/api/network.dart';
 import 'package:bb_earn_english/widget/audio_page.dart';
-import 'package:bb_earn_english/widget/detail_audio_page.dart';
 import 'package:bb_earn_english/widget/setting_page.dart';
 import 'package:flutter/material.dart';
 
@@ -49,6 +48,13 @@ class _MyAppState extends State<MyApp> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    getDataPhoto();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +63,9 @@ class _MyAppState extends State<MyApp> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              showSearch(context: context, delegate: DataSearch());
+              showSearch(
+                  context: context,
+                  delegate: DataSearch(list: listPhotoSearch));
             },
           ),
           IconButton(
@@ -121,13 +129,6 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: result search
-    throw UnimplementedError();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-
     return Scaffold(
       body: Container(
         child: FutureBuilder(
@@ -154,5 +155,26 @@ class DataSearch extends SearchDelegate<String> {
         ),
       ),
     );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+
+    var searchPhoto =
+        query.isEmpty ? list : list.where((p) => p.startsWith(query)).toList();
+
+    return ListView.builder(
+        itemCount: searchPhoto.length,
+        itemBuilder: (context, i) {
+          return ListTile(
+            leading: Icon(Icons.search),
+            title: Text(searchPhoto[i]),
+            onTap: (){
+              query = searchPhoto[i];
+              showResults(context);
+            },
+          );
+        });
   }
 }
