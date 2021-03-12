@@ -3,8 +3,8 @@ import 'package:bb_earn_english/untils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'app_bar_detail.dart';
-import 'bottom_detail.dart';
+import 'app_bar_detail_audio.dart';
+import 'bottom_detail_audio.dart';
 
 class DetailPage extends StatefulWidget {
   final Photo photo;

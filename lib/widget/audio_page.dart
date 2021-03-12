@@ -1,7 +1,7 @@
 import 'package:bb_earn_english/api/network.dart';
 import 'package:flutter/material.dart';
 
-import 'detail_page.dart';
+import 'detail_audio_page.dart';
 
 class HomePage extends StatefulWidget {
   @override

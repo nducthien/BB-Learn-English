@@ -1,4 +1,5 @@
-import 'package:bb_earn_english/widget/home_page.dart';
+import 'package:bb_earn_english/widget/audio_page.dart';
+import 'package:bb_earn_english/widget/setting_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -55,7 +56,9 @@ class _MyAppState extends State<MyApp> {
             icon: Icon(Icons.search),
             onPressed: () {},
           ),
-          IconButton(icon: Icon(Icons.settings), onPressed: () {}),
+          IconButton(icon: Icon(Icons.settings), onPressed: () {
+            Navigator.push(context, new MaterialPageRoute(builder: (context) => Setting()));
+          }),
         ],
       ),
       body: tabs[_currentIndex],
