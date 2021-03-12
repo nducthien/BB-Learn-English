@@ -1,4 +1,6 @@
+import 'package:bb_earn_english/api/network.dart';
 import 'package:bb_earn_english/widget/audio_page.dart';
+import 'package:bb_earn_english/widget/detail_audio_page.dart';
 import 'package:bb_earn_english/widget/setting_page.dart';
 import 'package:flutter/material.dart';
 
@@ -54,11 +56,16 @@ class _MyAppState extends State<MyApp> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: DataSearch());
+            },
           ),
-          IconButton(icon: Icon(Icons.settings), onPressed: () {
-            Navigator.push(context, new MaterialPageRoute(builder: (context) => Setting()));
-          }),
+          IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => Setting()));
+              }),
         ],
       ),
       body: tabs[_currentIndex],
@@ -80,6 +87,71 @@ class _MyAppState extends State<MyApp> {
           BottomNavigationBarItem(
               icon: Icon(Icons.list_sharp), title: Text("Playlist"))
         ],
+      ),
+    );
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  List<dynamic> list;
+  DataSearch({this.list});
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            query = "";
+          })
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: icon leading
+    return IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          close(context, null);
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: result search
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+
+    return Scaffold(
+      body: Container(
+        child: FutureBuilder(
+          future: fetchPhotos(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(snapshot.data[index].title),
+                    );
+                  });
+            } else if (snapshot.hasError) {
+              return Container(
+                child: Center(child: Text('Not Found Data')),
+              );
+            } else {
+              return Container(
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+          },
+        ),
       ),
     );
   }
