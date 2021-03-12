@@ -6,11 +6,16 @@ import 'package:flutter/rendering.dart';
 import 'app_bar_detail.dart';
 import 'bottom_detail.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Photo photo;
 
   DetailPage(this.photo);
 
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
