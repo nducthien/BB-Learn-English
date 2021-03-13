@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   final tabs = [
     Container(
       child: Center(
-        child: HomePage(),
+        child: AudioPage(),
       ),
     ),
     Container(

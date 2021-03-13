@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'detail_audio_page.dart';
 
-class HomePage extends StatefulWidget {
+class AudioPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _AudioPageState createState() => _AudioPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AudioPageState extends State<AudioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

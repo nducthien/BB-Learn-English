@@ -18,6 +18,8 @@ class AppBarDetail extends StatefulWidget {
 }
 
 class _AppBarDetailState extends State<AppBarDetail> {
+  int value = 0;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -45,8 +47,21 @@ class _AppBarDetailState extends State<AppBarDetail> {
           Padding(
             padding: EdgeInsets.only(right: 10.0),
             child: PopupMenuButton(
+              onSelected: (newValue) {
+                setState(() {
+                  value = newValue;
+                  if (value == 0) {
+                    print("Click to: " + value.toString());
+                  } else if (value == 1) {
+                    print("Click to: " + value.toString());
+                  } else if (value == 2) {
+                    print("Click to: " + value.toString());
+                  }
+                });
+              },
               itemBuilder: (context) => [
                 PopupMenuItem(
+                  value: 0,
                   child: Row(
                     children: [
                       Icon(Icons.playlist_add, color: Colors.black45),
@@ -58,6 +73,7 @@ class _AppBarDetailState extends State<AppBarDetail> {
                   ),
                 ),
                 PopupMenuItem(
+                  value: 1,
                   child: Row(
                     children: [
                       Icon(Icons.download_rounded, color: Colors.black45),
@@ -69,6 +85,7 @@ class _AppBarDetailState extends State<AppBarDetail> {
                   ),
                 ),
                 PopupMenuItem(
+                  value: 2,
                   child: Row(
                     children: [
                       Icon(Icons.share, color: Colors.black45),
