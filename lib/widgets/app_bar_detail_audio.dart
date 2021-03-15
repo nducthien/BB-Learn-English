@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 import '../untils/custom_dialog_box.dart';
 import '../pages/detail_audio_page.dart';
@@ -55,7 +56,7 @@ class _AppBarDetailState extends State<AppBarDetail> {
                   } else if (value == 1) {
                     print("Click to: " + value.toString());
                   } else if (value == 2) {
-                    print("Click to: " + value.toString());
+                    share('https://flutter.dev/', 'This is demo share in flutter');
                   }
                 });
               },
@@ -104,4 +105,12 @@ class _AppBarDetailState extends State<AppBarDetail> {
       ),
     );
   }
+}
+
+Future<void> share(dynamic link, String title) async {
+  await FlutterShare.share(
+      title: 'BB Learn English',
+      text: title,
+      linkUrl: link,
+      chooserTitle: 'Where you want to share');
 }

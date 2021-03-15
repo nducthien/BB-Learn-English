@@ -8,18 +8,18 @@ class ContentBoarding {
 
 List<ContentBoarding> contents = [
   ContentBoarding(
-      title: 'Quality Food',
+      title: 'Easy to Access',
       image: 'assets/quality.svg',
-      description: "when an unknown printer took a galley of type and scrambled it "
+      description: "In our app you will learn how to promote yourself in English"
   ),
   ContentBoarding(
-      title: 'Fast Delevery',
-      image: 'assets/delevery.svg',
-      description: "industry's standard dummy text ever since the 1500s"
+      title: 'Easy to Search',
+      image: 'assets/delivery.svg',
+      description: "You learn how to start a conversation to identify yourself, what questions to ask, and how to determine the flow of speech."
   ),
   ContentBoarding(
-      title: 'Reward surprises',
+      title: 'Easy to Manage',
       image: 'assets/reward.svg',
-      description: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
+      description: "It is very important to learn English at least enough to introduce yourself"
   ),
 ];
