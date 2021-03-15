@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../untils/custom_dialog_box.dart';
-import 'detail_audio_page.dart';
+import '../pages/detail_audio_page.dart';
 
 class AppBarDetail extends StatefulWidget {
   AppBarDetail({
