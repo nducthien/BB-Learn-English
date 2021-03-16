@@ -6,6 +6,7 @@ class Setting extends StatefulWidget {
 }
 
 bool _light = true;
+bool _theme = false;
 
 class _SettingState extends State<Setting> {
   String _userAvatarUrl = "";
@@ -131,14 +132,14 @@ class _SettingState extends State<Setting> {
             SwitchListTile(
                 activeColor: Colors.amber,
                 contentPadding: const EdgeInsets.all(0),
-                value: _light,
-                title: Text('Auto pronunciation',
+                value: _theme,
+                title: Text('Dark Theme',
                     style:
                         TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400)),
                 onChanged: (state) {
                   setState(() {
                     setState(() {
-                      _light = state;
+                      _theme = state;
                     });
                   });
                 })

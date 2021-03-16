@@ -1,5 +1,6 @@
-import 'package:bb_earn_english/api/network.dart';
 import 'package:bb_earn_english/pages/setting_page.dart';
+import 'package:bb_earn_english/pages/video_page.dart';
+import 'package:bb_earn_english/services/network.dart';
 import 'package:flutter/material.dart';
 
 import 'audio_page.dart';
@@ -20,10 +21,7 @@ class _HomePageState extends State<HomePage> {
     ),
     Container(
       child: Center(
-        child: Text(
-          'Videos',
-          style: TextStyle(fontSize: 30),
-        ),
+        child: VideoPage(),
       ),
     ),
     Container(
