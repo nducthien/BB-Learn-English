@@ -36,6 +36,7 @@ class _BottomDetailState extends State<BottomDetail> {
         max: musicLength.inSeconds.toDouble(),
         onChanged: (value) {
           seekToSec(value.toInt());
+          print("Value: ------ : " + value.toString());
         });
   }
 
@@ -56,12 +57,14 @@ class _BottomDetailState extends State<BottomDetail> {
     _audioPlayer.durationHandler = (d) {
       setState(() {
         musicLength = d;
+        print("musicLength: ------ : " + musicLength.toString());
       });
     };
 
     _audioPlayer.positionHandler = (p) {
       setState(() {
         position = p;
+        print("position: ------ : " + position.toString());
       });
     };
 
