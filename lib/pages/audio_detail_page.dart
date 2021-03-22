@@ -1,9 +1,10 @@
 import 'package:bb_earn_english/models/photo.dart';
+import 'package:bb_earn_english/widgets/detail_audio_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../widgets/app_bar_detail_audio.dart';
-import '../widgets/bottom_detail_audio.dart';
+import '../widgets/detail_audio_app_bar.dart';
+import '../widgets/detail_audio_bottom.dart';
 
 class DetailPage extends StatefulWidget {
   final Photo photo;
@@ -20,15 +21,13 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       // title: 'Flutter Demo',
       // theme: ThemeData(),
-      body: MyHomePage(title: 'Flutter Demo Home Page'),
+      body: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -90,214 +89,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
-
-class Content extends StatelessWidget {
-  const Content({Key key, ScrollController scrollViewController})
-      : _scrollViewController = scrollViewController,
-        super(key: key);
-
-  final ScrollController _scrollViewController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        controller: _scrollViewController,
-        child: Column(
-          children: <Widget>[
-            Text('Ta đã ở bên nhau'),
-            Text('Những năm tháng nhọc nhằn'),
-            Text('You make me feel like...'),
-            Text('I got everything'),
-            Text('Dù mai có ra sao'),
-            Text('Ta vẫn sẽ tự hào'),
-            Text('Vì đã luôn bên nhau'),
-            Text('We do everything'),
-            Text('Đưa tay đây nào'),
-            Text('Mãi bên nhau bạn nhớ'),
-            Text(
-                'Bên ngoài thế giới trời cao đất dày, ở trong team có anh em chất đầy'),
-            Text('Đưa tay đây nào'),
-            Text('Mãi bên nhau bạn nhớ'),
-            Text(
-                'Cùng mặc lên người chiếc áo bóng bẩy sau những ngày tháng trầy da tróc vẩy cùng nhau'),
-            Text('Trôi đi, trôi đi, trôi đi trên dòng thời gian'),
-            Text(
-                'Đã nuôi ta khôn lớn lên đôi khi không được bình an yeah yeah'),
-            Text('Bạn ơi tôi sẽ mãi thật lòng'),
-            Text('Sau mưa thì sẽ có cầu vồng'),
-            Text('Tuổi trẻ thường háo thắng'),
-            Text('Vẫn giữ màu áo trắng'),
-            Text('Đôi khi ta bí lối cùng đường'),
-            Text('Vẫn có homie luôn cùng đường'),
-            Text('Đi qua ngày mưa ngày nắng'),
-            Text('Từ mặt trời chuyển thành mặt trăng'),
-            Text('Tấm lòng vẫn luôn ngay ngắn'),
-            Text('Bụi phấn cùng với quả chò bay'),
-            Text('Tan trường cùng những quyển truyện hay'),
-            Text('Quấy phá giáo viên bắt đứng phạt'),
-            Text('Nhưng bạn bè thì không bỏ một ai'),
-            Text('Ta đã ở bên nhau'),
-            Text('Những năm tháng nhọc nhằn'),
-            Text('You make me feel like...'),
-            Text('I got everything'),
-            Text('Dù mai có ra sao'),
-            Text('Ta vẫn sẽ tự hào'),
-            Text('Vì đã luôn bên nhau'),
-            Text('We do everything'),
-            Text('Đưa tay đây nào'),
-            Text('Mãi bên nhau bạn nhớ'),
-            Text(
-                'Bên ngoài thế giới trời cao đất dày, ở trong team có anh em chất đầy'),
-            Text('Đưa tay đây nào'),
-            Text('Mãi bên nhau bạn nhớ'),
-            Text(
-                'Cùng mặc lên người chiếc áo bóng bẩy sau những ngày tháng trầy da tróc vẩy cùng nhau'),
-            Text('Thats break boy, 2009'),
-            Text('Tuổi thơ gắn bó, anh em Tiền Giang'),
-            Text('Nhảy b-boy, chạy show đám cưới'),
-            Text('Tập ngoài công viên, mặc đồ second hand'),
-            Text('Khu lao động đó, những ngày bình yên lộng gió'),
-            Text('Tiếng đồng lúa, phát ra từ giọng nó'),
-            Text('Cám ơn, vì đã trân trọng nó'),
-            Text('Yeah, cùng ôm, một giấc mộng khó'),
-            Text('Yeah'),
-            Text('Và míc cầm cứng tay'),
-            Text('Like a Travis Scott, ước gì mày đứng đây'),
-            Text('Cùng tận hưởng khoảnh khắc này, nà ní'),
-            Text('Chưa dịp tái ngộ, còn nhớ là quý'),
-            Text('OTD for life, những đứa con xứ ruộng thẳng cánh cò bay'),
-            Text('Vượt cùng ải khó trò hay'),
-            Text('Chung tay bẻ lái hướng đò ngay'),
-            Text('Ey'),
-            Text('Câu từ này là bạn hiền'),
-            Text('Là đồng minh ở bên cạnh dù cạn tiền'),
-            Text('Là lòng tin cho tâm hồn mình lên tiếng'),
-            Text('Nên hiến vì đam mê không nên tiếc'),
-            Text('Nên viết, trước khi thời gian dập tắt ý chí'),
-            Text('Nhìn lại thanh xuân bằng cặp mắt quyến luyến'),
-            Text('Cái đập tay không phân biệt chiến tuyến'),
-            Text('Ta luôn biết nhận sai, và lắng nghe lời chí lý'),
-            Text('I know we wont stop'),
-            Text('I know we wont...'),
-            Text('Vì chúng ta sinh ra là để bước đi mà'),
-            Text('I know we cant stop'),
-            Text('I know we cant'),
-            Text('Let it be'),
-            Text('Ta đã ở bên nhau'),
-            Text('Những năm tháng nhọc nhằn'),
-            Text('You make me feel like...'),
-            Text('I got everything'),
-            Text('Dù mai có ra sao'),
-            Text('Ta vẫn sẽ tự hào'),
-            Text('Vì đã luôn bên nhau'),
-            Text('We do everything'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-void showAlertDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        content: Container(
-          width: MediaQuery.of(context).size.width / 1.3,
-          height: MediaQuery.of(context).size.height / 2.5,
-          decoration: new BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: const Color(0xFFFFFF),
-            borderRadius: new BorderRadius.all(new Radius.circular(32.0)),
-          ),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              MaterialButton(
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.height / 12,
-                  child: Material(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(5.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Continue',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontFamily: 'helvetica_neue_light',
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-              MaterialButton(
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.height / 12,
-                  child: Material(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(5.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Continue',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontFamily: 'helvetica_neue_light',
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-              MaterialButton(
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.height / 12,
-                  child: Material(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(5.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Continue',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontFamily: 'helvetica_neue_light',
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
 }
