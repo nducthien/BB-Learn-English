@@ -3,34 +3,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LyricPainter extends CustomPainter with ChangeNotifier {
-  //Lyrics list
+  // Lyrics list
   List<Lyric> lyrics;
 
-  //List of Translation
+  // List of Translation
   List<Lyric> subLyrics;
 
-  //歌词画笔数组
+  // Lyrics brush array
   List<TextPainter> lyricTextPaints = [];
 
-  //翻译/音译歌词画笔数组
+  // Transliteration lyrics brush array
   List<TextPainter> subLyricTextPaints = [];
 
-  //画布大小
+  // canvasSize
   Size canvasSize = Size.zero;
 
-  //字体最大宽度
+  // Lyric maxWidth
   double lyricMaxWidth;
 
-  //歌词间距
+  // Lyric Gap Value
   double lyricGapValue;
 
-  //歌词间距
+  // subLyricGapValue
   double subLyricGapValue;
 
-  //歌词总长度
+  // totalHeight
   double totalHeight = 0;
 
-  //通过偏移量控制歌词滑动
+  // Control lyrics sliding by offset
   static double _offset = 0;
 
   set offset(value) {
@@ -38,31 +38,31 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
     notifyListeners();
   }
 
-  //歌词位置
+  // Lyric position
   int currentLyricIndex = 0;
 
-  //老的动画控制器
+  // Old animation controller
   static AnimationController _animationController;
 
-  //老的上一行位置
+  // Old previous line position
   static int _oldCurrentLyricIndex;
 
   //因空行高度与非空行高度不一致，存一个非空行的位置，绘制时使用
   var notEmptyLyricIndex = 0;
 
-  //歌词位置
+  //Lyric position
   int notEmptySubLyricIndex = 0;
 
-  //歌词行高度
+  //Lyric line height
   double _subLyricHeight = 0;
 
-  //歌词样式
+  //lyricTextStyle
   TextStyle lyricTextStyle;
 
-  //翻译/音译歌词样式
+  // Translation Lyrics Style
   TextStyle subLyricTextStyle;
 
-  //当前歌词样式
+  // Current lyrics style
   TextStyle currLyricTextStyle;
 
   LyricPainter(this.lyrics,
@@ -82,25 +82,24 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
         this.currLyricTextStyle =
             currLyricStyle ?? TextStyle(color: Colors.red, fontSize: 20),
         this.subLyrics = remarkLyrics {
-    //歌词转画笔 - Lyrics to brush
+    // Lyrics to brush - addAll add elements from another map
     lyricTextPaints.addAll(lyrics
-        .map(
-          (l) => TextPainter(
+        .map((l) => TextPainter(
               text: TextSpan(text: l.lyric, style: lyricTextStyle),
               textDirection: TextDirection.ltr),
         )
         .toList());
 
-    //翻译/音译歌词转画笔 - Translation/Transliteration Lyrics to Brush
+    // Transliteration Lyrics to Brush
     if (subLyrics != null && subLyrics.isNotEmpty) {
       subLyricTextPaints.addAll(subLyrics
           .map((l) => TextPainter(
               text: TextSpan(text: l.lyric, style: subLyricTextStyle),
               textDirection: TextDirection.ltr))
           .toList());
-      //因空行高度与非空行高度不一致，先存一个非空行的位置
+      //Because the height of the blank line is inconsistent with the height of the non-blank line, first save the position of a non-blank line
       notEmptySubLyricIndex = getNotEmptyLineHeight(subLyrics);
-      //计算默认歌词高度
+      //Calculate the default lyrics height
       subLyricTextPaints[notEmptySubLyricIndex]
         ..layout(maxWidth: lyricMaxWidth);
       _subLyricHeight = subLyricTextPaints[notEmptySubLyricIndex].height;
@@ -114,7 +113,7 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
     }
   }
 
-  /// 因空行高度与非空行高度不一致，获取非空行的位置
+  /// Because the height of the blank line is inconsistent with the height of the non-blank line, get the position of the non-blank line
   int getNotEmptyLineHeight(List<Lyric> lyrics) =>
       lyrics.indexOf(lyrics.firstWhere((lyric) => lyric.lyric.trim().isNotEmpty,
           orElse: () => lyrics.first));
@@ -132,11 +131,11 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
             _animationController = null;
           }
         });
-      // 计算上一行偏移量
+      // Calculate the offset of the previous line
       var previousRowOffset = computeScrollY(currentLyricIndex - 1);
-      // 计算当前行偏移量
+      // Calculate the current row offset
       var currentRowOffset = computeScrollY(currentLyricIndex);
-      // 起始为上一行，结束点为当前行
+      // The start is the previous line, and the end point is the current line
       Animation animation =
           Tween<double>(begin: previousRowOffset, end: currentRowOffset)
               .animate(_animationController);
@@ -152,9 +151,9 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
   void paint(Canvas canvas, Size size) {
     canvasSize = size;
 
-    //初始化歌词的Y坐标在正中央
+    //The Y coordinate of the initial lyrics is in the center
     lyricTextPaints[currentLyricIndex]
-      //设置歌词
+      //Set lyrics
       ..text = TextSpan(
           text: lyrics[currentLyricIndex].lyric, style: currLyricTextStyle)
       ..layout(maxWidth: lyricMaxWidth);
@@ -162,24 +161,24 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
         size.height / 2 -
         lyricTextPaints[currentLyricIndex].height / 2;
 
-    //遍历歌词进行绘制
+    // Traverse the lyrics to draw
     for (int lyricIndex = 0; lyricIndex < lyrics.length; lyricIndex++) {
       var currentLyricTextPaint = lyricTextPaints[lyricIndex];
 
       var currentLyric = lyrics[lyricIndex];
-      //仅绘制在屏幕内的歌词
+      // Lyrics drawn only on the screen
       if (currentLyricY < size.height && currentLyricY > 0) {
-        //绘制歌词到画布
+        // Draw lyric
         currentLyricTextPaint
-          //设置歌词
+          // Set Lyric
           ..text = TextSpan(
               text: currentLyric.lyric,
               style: currentLyricIndex == lyricIndex
                   ? currLyricTextStyle
                   : lyricTextStyle)
-          //计算文本宽高
+          // Calculate text width and height
           ..layout(maxWidth: lyricMaxWidth)
-          //绘制 offset=横向居中
+          // Draw offset = Horizontal center
           ..paint(
               canvas,
               Offset((size.width - currentLyricTextPaint.width) / 2,
@@ -187,7 +186,7 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
       }
       currentLyricTextPaint..layout(maxWidth: lyricMaxWidth);
       var currentLyricHeight = currentLyricTextPaint.height;
-      //当前歌词结束后调整下次开始绘制歌词的y坐标
+      //当前歌词结束后调整下次开始绘制歌词的y坐标 - After the current lyrics are over, adjust the y coordinate of the lyrics that will be drawn next time
       currentLyricY += currentLyricHeight + lyricGapValue;
       //如果有翻译歌词时,寻找该行歌词以后的翻译歌词
       if (subLyrics != null) {
@@ -197,23 +196,23 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
                 subLyric.endTime <= currentLyric.endTime)
             .toList();
         remarkLyrics.forEach((remarkLyric) {
-          //获取位置
+          // get index
           var subIndex = subLyrics.indexOf(remarkLyric);
 
-          //仅绘制在屏幕内的歌词
+          // Lyrics drawn only on the screen
           if (currentLyricY < size.height && currentLyricY > 0) {
-            subLyricTextPaints[subIndex] //设置歌词
+            subLyricTextPaints[subIndex] //Set lyrics
               ..text =
                   TextSpan(text: remarkLyric.lyric, style: subLyricTextStyle)
-              //计算文本宽高
+              // Calculate text width and height
               ..layout(maxWidth: lyricMaxWidth)
-              //绘制 offset=横向居中
+              // Draw offset = Horizontal center
               ..paint(
                   canvas,
                   Offset((size.width - subLyricTextPaints[subIndex].width) / 2,
                       currentLyricY));
           }
-          //当前歌词结束后调整下次开始绘制歌词的y坐标
+          //当前歌词结束后调整下次开始绘制歌词的y坐标 - After the current lyrics are over, adjust the y coordinate of the lyrics that will be drawn next time
           currentLyricY += _subLyricHeight + subLyricGapValue;
         });
       }
@@ -222,11 +221,11 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
 
   @override
   bool shouldRepaint(LyricPainter oldDelegate) {
-    //当歌词进度发生变化时重新绘制
+    //Redraw when the lyrics progress changes
     return oldDelegate.currentLyricIndex != currentLyricIndex;
   }
 
-  //根据当前时长获取歌词位置
+  // Get index of the lyrics according to the current duration
   int findLyricIndexByDuration(double curDuration, List<Lyric> lyrics) {
     for (int i = 0; i < lyrics.length; i++) {
       if (curDuration >= lyrics[i].startTime.inMilliseconds &&
@@ -237,7 +236,7 @@ class LyricPainter extends CustomPainter with ChangeNotifier {
     return 0;
   }
 
-  /// 计算传入行和第一行的偏移量
+  /// 计算传入行和第一行的偏移量 - Calculate the offset between the incoming line and the first line
   double computeScrollY(int curLine) {
     double totalHeight = 0;
     for (var i = 0; i < curLine; i++) {

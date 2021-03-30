@@ -24,7 +24,7 @@ class _ContentState extends State<Content> with TickerProviderStateMixin {
       "[00:25.55]Khi đi em hỏi"
       "[00:27.04]Khi về em chào"
       "[00:28.80]Miệng em chúm chím"
-      "[00:30.53]Mẹ yêu không nào.";
+      "[00:30.53]Mẹ có yêu không nào.";
 
   Timer _countdownTimer;
   int _countdownNum = 1000000;
