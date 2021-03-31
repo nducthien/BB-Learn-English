@@ -36,7 +36,7 @@ class _BottomDetailState extends State<BottomDetail> {
         max: musicLength.inSeconds.toDouble(),
         onChanged: (value) {
           seekToSec(value.toInt());
-          print("Value: ------ : " + value.toString());
+          print("Value seekToSec: ------ : " + value.toString());
         });
   }
 
