@@ -11,7 +11,7 @@ class OnBoardingPage extends StatefulWidget {
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
   int currentIndex = 0;
-  PageController _controller;
+  PageController? _controller;
 
   @override
   void initState() {
@@ -21,7 +21,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     super.dispose();
   }
 
@@ -45,11 +45,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   child: Column(
                     children: [
                       SvgPicture.asset(
-                        contents[i].image,
+                        contents[i].image!,
                         height: 300,
                       ),
                       Text(
-                        contents[i].title,
+                        contents[i].title!,
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
@@ -57,7 +57,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        contents[i].description,
+                        contents[i].description!,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18,
@@ -83,9 +83,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             height: 60,
             margin: EdgeInsets.all(40),
             width: double.infinity,
-            child: FlatButton(
+            child: TextButton(
+              style: TextButton.styleFrom(
+                primary: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
               child: Text(
-                  currentIndex == contents.length - 1 ? "Continue" : "Next"),
+                currentIndex == contents.length - 1 ? "Continue" : "Next",
+                style: const TextStyle(color: Colors.white),
+              ),
               onPressed: () {
                 if (currentIndex == contents.length - 1) {
                   Navigator.pushReplacement(
@@ -95,16 +103,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),
                   );
                 }
-                _controller.nextPage(
+                _controller!.nextPage(
                   duration: Duration(milliseconds: 100),
                   curve: Curves.bounceIn,
                 );
               },
-              color: Theme.of(context).primaryColor,
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
             ),
           )
         ],

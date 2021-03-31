@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class BottomDetail extends StatefulWidget {
   BottomDetail({
-    Key key,
-    bool showBottomBar,
+    Key? key,
+    bool? showBottomBar,
   })  : showBottomBar = showBottomBar,
         super(key: key);
 
-  final bool showBottomBar;
+  final bool? showBottomBar;
 
   @override
   _BottomDetailState createState() => _BottomDetailState();
@@ -22,8 +22,8 @@ class _BottomDetailState extends State<BottomDetail> {
   bool playing = false; // at the beginning, not playing any song
   IconData btnPlay = Icons.play_arrow; // the main state of the play button
 
-  AudioPlayer _audioPlayer;
-  AudioCache cache;
+  AudioPlayer? _audioPlayer;
+  late AudioCache cache;
 
   Duration position = new Duration();
   Duration musicLength = new Duration();
@@ -42,31 +42,30 @@ class _BottomDetailState extends State<BottomDetail> {
 
   void seekToSec(int value) {
     Duration newPos = Duration(seconds: value);
-    _audioPlayer.seek(newPos);
+    _audioPlayer!.seek(newPos);
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _audioPlayer = AudioPlayer();
     cache = AudioCache(fixedPlayer: _audioPlayer);
 
     // handle audio time
-    _audioPlayer.durationHandler = (d) {
-      setState(() {
-        musicLength = d;
-        print("musicLength: ------ : " + musicLength.toString());
-      });
-    };
+    // _audioPlayer.durationHandler = (d) {
+    //   setState(() {
+    //     musicLength = d;
+    //     print("musicLength: ------ : " + musicLength.toString());
+    //   });
+    // };
 
-    _audioPlayer.positionHandler = (p) {
-      setState(() {
-        position = p;
-        print("position: ------ : " + position.toString());
-      });
-    };
+    // _audioPlayer.positionHandler = (p) {
+    //   setState(() {
+    //     position = p;
+    //     print("position: ------ : " + position.toString());
+    //   });
+    // };
 
     cache.load("tbdk.mp3");
   }
@@ -76,7 +75,7 @@ class _BottomDetailState extends State<BottomDetail> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       color: Colors.blueAccent,
-      height: widget.showBottomBar ? 114 : 0,
+      height: widget.showBottomBar! ? 114 : 0,
       duration: Duration(milliseconds: 200),
       child: Column(
         children: <Widget>[
@@ -111,7 +110,7 @@ class _BottomDetailState extends State<BottomDetail> {
                                   playing = true;
                                 });
                               } else {
-                                _audioPlayer.pause();
+                                _audioPlayer!.pause();
                                 setState(() {
                                   btnPlay = Icons.play_arrow;
                                   playing = false;

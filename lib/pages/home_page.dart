@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getDataPhoto();
     super.initState();
   }
@@ -80,29 +79,26 @@ class _HomePageState extends State<HomePage> {
           setState(() {});
         },
         items: [
+          BottomNavigationBarItem(icon: Icon(Icons.audiotrack), label: "Audio"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.audiotrack), title: Text("Audio")),
+              icon: Icon(Icons.ondemand_video), label: "Videos"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.ondemand_video), title: Text("Videos")),
+              icon: Icon(Icons.featured_play_list_rounded), label: "Programs"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.featured_play_list_rounded),
-              title: Text("Programs")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list_sharp), title: Text("Playlist"))
+              icon: Icon(Icons.list_sharp), label: "Playlist")
         ],
       ),
     );
   }
 }
 
-class DataSearch extends SearchDelegate<String> {
-  List<dynamic> list;
+class DataSearch extends SearchDelegate<String?> {
+  List<dynamic>? list;
 
   DataSearch({this.list});
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // TODO: implement buildActions
     return [
       IconButton(
           icon: Icon(Icons.clear),
@@ -114,7 +110,6 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildLeading(BuildContext context) {
-    // TODO: icon leading
     return IconButton(
         icon: Icon(Icons.arrow_back),
         onPressed: () {
@@ -124,7 +119,6 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: result search
     return Scaffold(
       body: Container(
         child: FutureBuilder(
@@ -155,10 +149,8 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-
     var searchPhoto =
-        query.isEmpty ? list : list.where((p) => p.startsWith(query)).toList();
+        query.isEmpty ? list! : list!.where((p) => p.startsWith(query)).toList();
 
     return ListView.builder(
         itemCount: searchPhoto.length,

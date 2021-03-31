@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
-
 import '../untils/custom_dialog_box.dart';
 
 
 class AppBarDetail extends StatefulWidget {
   AppBarDetail({
-    Key key,
-    bool showBottomBar,
-    bool showAppbar,
+    Key? key,
+    bool? showBottomBar,
+    bool? showAppbar,
   })  : showAppbar = showAppbar,
         super(key: key);
 
-  final bool showAppbar;
+  final bool? showAppbar;
 
   @override
   _AppBarDetailState createState() => _AppBarDetailState();
@@ -24,7 +23,7 @@ class _AppBarDetailState extends State<AppBarDetail> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      height: widget.showAppbar ? 56.0 : 0.0,
+      height: widget.showAppbar! ? 56.0 : 0.0,
       duration: Duration(milliseconds: 200),
       child: AppBar(
         title: Text("BB Learn English"),
@@ -48,7 +47,7 @@ class _AppBarDetailState extends State<AppBarDetail> {
           Padding(
             padding: EdgeInsets.only(right: 10.0),
             child: PopupMenuButton(
-              onSelected: (newValue) {
+              onSelected: (dynamic newValue) {
                 setState(() {
                   value = newValue;
                   if (value == 0) {
