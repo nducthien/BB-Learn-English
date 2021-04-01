@@ -85,7 +85,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             width: double.infinity,
             child: TextButton(
               style: TextButton.styleFrom(
-                primary: Theme.of(context).primaryColor,
+                backgroundColor: Theme.of(context).primaryColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
