@@ -18,7 +18,6 @@ class BottomDetail extends StatefulWidget {
 bool _light = true;
 
 class _BottomDetailState extends State<BottomDetail> {
-
   bool playing = false; // at the beginning, not playing any song
   IconData btnPlay = Icons.play_arrow; // the main state of the play button
 
@@ -53,23 +52,21 @@ class _BottomDetailState extends State<BottomDetail> {
     cache = AudioCache(fixedPlayer: _audioPlayer);
 
     // handle audio time
-    // _audioPlayer.durationHandler = (d) {
-    //   setState(() {
-    //     musicLength = d;
-    //     print("musicLength: ------ : " + musicLength.toString());
-    //   });
-    // };
+    _audioPlayer!.onDurationChanged.listen((duration) {
+      setState(() {
+        musicLength = duration;
+        print("musicLength: ------ : " + musicLength.toString());
+      });
+    });
 
-    // _audioPlayer.positionHandler = (p) {
-    //   setState(() {
-    //     position = p;
-    //     print("position: ------ : " + position.toString());
-    //   });
-    // };
-
+    _audioPlayer!.onAudioPositionChanged.listen((p) {
+      setState(() {
+        position = p;
+        print("position: ------ : " + position.toString());
+      });
+    });
     cache.load("tbdk.mp3");
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -81,52 +78,52 @@ class _BottomDetailState extends State<BottomDetail> {
         children: <Widget>[
           Expanded(
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                ),
-                child: Column(
+            decoration: BoxDecoration(
+              color: Colors.blueAccent,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                slider(),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    slider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            icon: Icon(Icons.skip_previous),
-                            iconSize: 35.0,
-                            color: Colors.white,
-                            onPressed: null),
-                        IconButton(
-                            icon: Icon(btnPlay),
-                            iconSize: 50.0,
-                            color: Colors.white,
-                            onPressed: () {
-                              if (!playing) {
-                                cache.play("tbdk.mp3");
-                                setState(() {
-                                  btnPlay = Icons.pause;
-                                  playing = true;
-                                });
-                              } else {
-                                _audioPlayer!.pause();
-                                setState(() {
-                                  btnPlay = Icons.play_arrow;
-                                  playing = false;
-                                });
-                              }
-                            }),
-                        IconButton(
-                            icon: Icon(Icons.skip_next),
-                            iconSize: 35.0,
-                            color: Colors.white,
-                            onPressed: null),
-                      ],
-                    ),
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.skip_previous),
+                        iconSize: 35.0,
+                        color: Colors.white,
+                        onPressed: null),
+                    IconButton(
+                        icon: Icon(btnPlay),
+                        iconSize: 50.0,
+                        color: Colors.white,
+                        onPressed: () {
+                          if (!playing) {
+                            cache.play("tbdk.mp3");
+                            setState(() {
+                              btnPlay = Icons.pause;
+                              playing = true;
+                            });
+                          } else {
+                            _audioPlayer!.pause();
+                            setState(() {
+                              btnPlay = Icons.play_arrow;
+                              playing = false;
+                            });
+                          }
+                        }),
+                    IconButton(
+                        icon: Icon(Icons.skip_next),
+                        iconSize: 35.0,
+                        color: Colors.white,
+                        onPressed: null),
                   ],
                 ),
-              ))
+              ],
+            ),
+          ))
         ],
       ),
     );
