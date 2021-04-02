@@ -13,7 +13,7 @@ List<Photo> parsePhoto(String responseBody) {
 
 Future<List<Photo>> fetchPhotos() async {
   final response =
-      await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+      await http.get(Uri.https('jsonplaceholder.typicode.com', 'photos'));
   if (response.statusCode == 200) {
     return compute(parsePhoto, response.body);
   } else {
@@ -24,8 +24,7 @@ Future<List<Photo>> fetchPhotos() async {
 var listPhotoSearch = [];
 
 Future getDataPhoto() async {
-  var url = "https://jsonplaceholder.typicode.com/photos";
-  var response = await http.get(Uri.parse(url));
+  var response = await http.get(Uri.https('jsonplaceholder.typicode.com', 'photos'));
   var responseBody = jsonDecode(response.body);
   for (int i = 0; i < responseBody.length; i++) {
     listPhotoSearch.add(responseBody[i]['title']);

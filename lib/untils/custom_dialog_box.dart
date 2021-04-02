@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomDialogBox extends StatefulWidget {
-  final String title, descriptions, text;
-  final Image img;
+  final String? title, descriptions, text;
+  final Image? img;
 
   const CustomDialogBox(
-      {Key key, this.title, this.descriptions, this.text, this.img})
+      {Key? key, this.title, this.descriptions, this.text, this.img})
       : super(key: key);
 
   @override
@@ -50,14 +50,14 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                widget.title,
+                widget.title!,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: 15,
               ),
               Text(
-                widget.descriptions,
+                widget.descriptions!,
                 style: TextStyle(fontSize: 14),
                 textAlign: TextAlign.center,
               ),
@@ -66,12 +66,12 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      widget.text,
+                      widget.text!,
                       style: TextStyle(fontSize: 18),
                     )),
               ),

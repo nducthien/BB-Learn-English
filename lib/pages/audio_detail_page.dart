@@ -7,7 +7,7 @@ import '../widgets/detail_audio_app_bar.dart';
 import '../widgets/detail_audio_bottom.dart';
 
 class DetailPage extends StatefulWidget {
-  final Photo photo;
+  final Photo? photo;
 
   DetailPage(this.photo);
 
@@ -27,14 +27,14 @@ class _DetailPageState extends State<DetailPage> {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  ScrollController _scrollViewController;
+  ScrollController? _scrollViewController;
   bool _showAppbar = true;
   bool isScrollingDown = false;
   bool _showBottomBar = true;
@@ -43,11 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _scrollViewController = new ScrollController();
-    _scrollViewController.addListener(_calScroll);
+    _scrollViewController!.addListener(_calScroll);
   }
 
   void _calScroll() {
-    if (_scrollViewController.position.userScrollDirection ==
+    if (_scrollViewController!.position.userScrollDirection ==
         ScrollDirection.reverse) {
       if (!isScrollingDown) {
         isScrollingDown = true;
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
-    if (_scrollViewController.position.userScrollDirection ==
+    if (_scrollViewController!.position.userScrollDirection ==
         ScrollDirection.forward) {
       if (isScrollingDown) {
         isScrollingDown = false;
@@ -70,8 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    _scrollViewController.removeListener(_calScroll);
-    _scrollViewController.dispose();
+    _scrollViewController!.removeListener(_calScroll);
+    _scrollViewController!.dispose();
     super.dispose();
   }
 

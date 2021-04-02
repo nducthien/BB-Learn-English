@@ -13,8 +13,8 @@ class APIService {
   final String _baseUrl = 'www.googleapis.com';
   String _nextPageToken = '';
 
-  Future<Channel> fetchChannel({String channelId}) async {
-    Map<String, String> parameters = {
+  Future<Channel> fetchChannel({String? channelId}) async {
+    Map<String, String?> parameters = {
       'part': 'snippet, contentDetails, statistics',
       'id': channelId,
       'key': API_KEY,
@@ -47,8 +47,8 @@ class APIService {
     }
   }
 
-  Future<List<Video>> fetchVideosFromPlaylist({String playlistId}) async {
-    Map<String, String> parameters = {
+  Future<List<Video>> fetchVideosFromPlaylist({String? playlistId}) async {
+    Map<String, String?> parameters = {
       'part': 'snippet',
       'playlistId': playlistId,
       'maxResults': '8',

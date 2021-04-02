@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'lyric_widget.dart';
 
 class Content extends StatefulWidget {
-  const Content({Key key, ScrollController scrollViewController})
+  const Content({Key? key, ScrollController? scrollViewController})
       : scrollViewController = scrollViewController,
         super(key: key);
 
-  final ScrollController scrollViewController;
+  final ScrollController? scrollViewController;
 
   @override
   _ContentState createState() => _ContentState();
@@ -26,7 +26,7 @@ class _ContentState extends State<Content> with TickerProviderStateMixin {
       "[00:28.80]Miệng em chúm chím"
       "[00:30.53]Mẹ có yêu không nào.";
 
-  Timer _countdownTimer;
+  Timer? _countdownTimer;
   int _countdownNum = 1000000;
   Duration start = new Duration(seconds: 0);
 
@@ -40,7 +40,7 @@ class _ContentState extends State<Content> with TickerProviderStateMixin {
         _countdownNum--;
         start = start + new Duration(seconds: 1);
         if (_countdownNum == 0) {
-          _countdownTimer.cancel();
+          _countdownTimer!.cancel();
         }
       });
     });

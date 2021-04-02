@@ -1,7 +1,7 @@
 class ContentBoarding {
-  String image;
-  String title;
-  String description;
+  String? image;
+  String? title;
+  String? description;
 
   ContentBoarding({this.image, this.title, this.description});
 }
