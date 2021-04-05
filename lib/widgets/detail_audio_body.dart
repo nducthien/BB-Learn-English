@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bb_earn_english/untils/lyric_util.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'lyric_widget.dart';
 
@@ -30,11 +31,35 @@ class _ContentState extends State<Content> with TickerProviderStateMixin {
   int _countdownNum = 1000000;
   Duration start = new Duration(seconds: 0);
 
+  Duration parseDuration(String s) {
+    int hours = 0;
+    int minutes = 0;
+    int micros;
+    List<String> parts = s.split(':');
+    if (parts.length > 2) {
+      hours = int.parse(parts[parts.length - 3]);
+    }
+    if (parts.length > 1) {
+      minutes = int.parse(parts[parts.length - 2]);
+    }
+    micros = (double.parse(parts[parts.length - 1]) * 1000000).round();
+    return Duration(hours: hours, minutes: minutes, microseconds: micros);
+  }
+
+  Future<int> getAudio() async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    final int positionAudio = myPrefs.getInt('POSITION_AUDIO');
+    print("NOTHING_GONE_FOR_YOU: ---------" + positionAudio.toString());
+    return positionAudio;
+  }
+
   @override
   void initState() {
     if (_countdownTimer != null) {
       return;
     }
+
+    getAudio();
     _countdownTimer = new Timer.periodic(new Duration(seconds: 1), (timer) {
       setState(() {
         _countdownNum--;
