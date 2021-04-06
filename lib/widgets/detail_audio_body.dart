@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bb_earn_english/models/audio.dart';
 import 'package:bb_earn_english/untils/lyric_util.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,11 +8,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'lyric_widget.dart';
 
 class Content extends StatefulWidget {
-  const Content({Key key, ScrollController scrollViewController})
+  const Content({Key key, ScrollController scrollViewController, this.audio})
       : scrollViewController = scrollViewController,
         super(key: key);
 
   final ScrollController scrollViewController;
+  final Audio audio;
 
   @override
   _ContentState createState() => _ContentState();
@@ -83,7 +85,7 @@ class _ContentState extends State<Content> with TickerProviderStateMixin {
         size: Size(300, 300),
         lyrics: lyrics,
         vsync: this,
-        currentProgress: start.inMilliseconds.toDouble(),
+        currentProgress: widget.audio.position.inSeconds.toDouble(),
       )),
     ));
   }

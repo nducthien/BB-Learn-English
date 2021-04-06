@@ -1,3 +1,4 @@
+import 'package:bb_earn_english/models/audio.dart';
 import 'package:bb_earn_english/models/photo.dart';
 import 'package:bb_earn_english/widgets/detail_audio_body.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,8 @@ class _DetailPageState extends State<DetailPage> {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key key, this.audio}) : super(key: key);
+  final Audio audio;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -82,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             AppBarDetail(showAppbar: _showAppbar),
-            Content(scrollViewController: _scrollViewController),
+            Content(scrollViewController: _scrollViewController, audio: widget.audio),
             BottomDetail(showBottomBar: _showBottomBar)
           ],
         ),

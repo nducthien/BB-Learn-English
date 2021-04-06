@@ -1,5 +1,7 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:bb_earn_english/models/audio.dart';
+import 'package:bb_earn_english/widgets/detail_audio_body.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,6 +26,7 @@ class _BottomDetailState extends State<BottomDetail> {
 
   AudioPlayer _audioPlayer;
   AudioCache cache;
+  Audio audio;
 
   Duration position = new Duration();
   Duration musicLength = new Duration();
@@ -69,8 +72,10 @@ class _BottomDetailState extends State<BottomDetail> {
     _audioPlayer.onAudioPositionChanged.listen((p) {
       setState(() {
         position = p;
+        audio = Audio(position: position);
         savePosition();
         print("position: ------ : " + position.toString());
+        print("position audio: ------ : " + audio.toString());
       });
     });
 
@@ -121,6 +126,13 @@ class _BottomDetailState extends State<BottomDetail> {
                             setState(() {
                               btnPlay = Icons.pause;
                               playing = true;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Content(
+                                      audio: audio,
+                                    )),
+                              );
                             });
                           } else {
                             _audioPlayer.pause();
