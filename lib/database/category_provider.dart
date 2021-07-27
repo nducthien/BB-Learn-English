@@ -1,5 +1,6 @@
 import 'package:bb_earn_english/const/const.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Category {
   int id;
@@ -46,5 +47,20 @@ class CategoryProvider {
     ]);
     if (maps.length > 0) return maps.map((e) => Category.fromMap(e)).toList();
     return null;
+  }
+}
+
+class CategoryList extends StateNotifier<List<Category>> {
+  CategoryList(List<Category> state) : super(state ?? []);
+
+  void addAll(List<Category> category) {
+    state.addAll(category);
+  }
+
+  void add(Category category) {
+    state = [
+      ...state,
+      category,
+    ];
   }
 }
