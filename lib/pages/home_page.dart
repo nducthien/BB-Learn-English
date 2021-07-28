@@ -1,3 +1,4 @@
+import 'package:bb_earn_english/pages/category_page.dart';
 import 'package:bb_earn_english/pages/play_list_page.dart';
 import 'package:bb_earn_english/pages/setting_page.dart';
 import 'package:bb_earn_english/pages/video_page.dart';
@@ -28,10 +29,7 @@ class _HomePageState extends State<HomePage> {
     ),
     Container(
       child: Center(
-        child: Text(
-          'Programs',
-          style: TextStyle(fontSize: 30),
-        ),
+        child: CategoryPage(),
       ),
     ),
     Container(

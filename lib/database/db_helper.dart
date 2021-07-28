@@ -7,7 +7,7 @@ import 'package:path/path.dart';
 
 Future<Database> copyDB() async {
   var dbPath = await getDatabasesPath();
-  var path = join(dbPath, db_name);
+  var path = join(dbPath, db_name_test);
 
   var exists = await databaseExists(path);
   print("Exists is: ----------" + exists.toString());
@@ -17,7 +17,7 @@ Future<Database> copyDB() async {
     } catch (_) {}
 
     // copy from assets
-    ByteData data = await rootBundle.load(join("assets/db", db_name));
+    ByteData data = await rootBundle.load(join("assets/db", db_name_test));
     List<int> bytes =
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     await File(path).writeAsBytes(bytes, flush: true);
